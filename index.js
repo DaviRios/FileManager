@@ -2,14 +2,14 @@ const fs = require('fs').promises;
 const path = require('path');
 const readline = require('node:readline');
 
-const BASE_DIRECTORY = './files'; // Diretório padrão para os arquivos
+const BASE_DIRECTORY = './files'; // Default directory
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
 });
 
-// Função para usar rl.question() com async/await
+// rl.question() + async/await
 const askQuestion = (query) => new Promise((resolve) => rl.question(query, resolve));
 
 async function start() {
@@ -56,7 +56,7 @@ async function handleCreateFile() {
     const filePath = path.join(BASE_DIRECTORY, fileName);
 
     try {
-        await fs.mkdir(BASE_DIRECTORY, { recursive: true }); // Cria a pasta se não existir
+        await fs.mkdir(BASE_DIRECTORY, { recursive: true }); // If folder doesn't exist, create
         await fs.writeFile(filePath, content);
         console.log(`\x1b[32m✅ File created successfully: ${filePath}\x1b[0m`);
     } catch (err) {
@@ -78,7 +78,7 @@ async function handleEditFile() {
     const filePath = path.join(BASE_DIRECTORY, fileName);
 
     try {
-        await fs.access(filePath); // Verifica se o arquivo existe
+        await fs.access(filePath); // Verify file existence
         const newContent = await askQuestion("✍️ Enter new content: ");
         await fs.writeFile(filePath, newContent);
         console.log(`\x1b[32m✅ File edited successfully: ${filePath}\x1b[0m`);

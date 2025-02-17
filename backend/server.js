@@ -5,10 +5,10 @@ const path = require('path');
 
 const app = express();
 const PORT = 5000;
-const BASE_DIRECTORY = path.join(__dirname, 'files'); // Diretório onde os arquivos serão salvos
+const BASE_DIRECTORY = path.join(__dirname, 'files'); // Default directory save
 
-app.use(cors()); // Permite comunicação com o frontend
-app.use(express.json()); // Permite receber JSON no body das requisições
+app.use(cors()); // Com. frontend
+app.use(express.json()); // Json body access
 
 // 📂 Listar arquivos
 app.get('/files', async (req, res) => {
@@ -20,7 +20,7 @@ app.get('/files', async (req, res) => {
     }
 });
 
-// ✍️ Criar arquivo
+// ✍️ Create File
 app.post('/files', async (req, res) => {
     const { name, content } = req.body;
     if (!name) return res.status(400).json({ error: 'File name is required' });
@@ -35,13 +35,13 @@ app.post('/files', async (req, res) => {
     }
 });
 
-// ✏️ Editar arquivo
+// ✏️ Edit File
 app.put('/files/:name', async (req, res) => {
     const { content } = req.body;
     const filePath = path.join(BASE_DIRECTORY, req.params.name);
 
     try {
-        await fs.access(filePath); // Verifica se o arquivo existe
+        await fs.access(filePath); // Verify file existence
         await fs.writeFile(filePath, content || '');
         res.json({ message: '✅ File edited successfully' });
     } catch (err) {
@@ -49,7 +49,7 @@ app.put('/files/:name', async (req, res) => {
     }
 });
 
-// 🗑️ Deletar arquivo
+// 🗑️ Delete File
 app.delete('/files/:name', async (req, res) => {
     const filePath = path.join(BASE_DIRECTORY, req.params.name);
 
@@ -61,5 +61,5 @@ app.delete('/files/:name', async (req, res) => {
     }
 });
 
-// 🚀 Iniciar servidor
+// 🚀 Start server
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

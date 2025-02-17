@@ -35,18 +35,24 @@ const FileManager = () => {
     };
 
     const editFile = async (name: string) => {
-        const newContent = prompt(`Edit content of ${name}:`);
-        if (newContent !== null) {
-            try {
-                await axios.put(`${API_URL}/${name}`, { content: newContent });
-                fetchFiles();
-            } catch (error) {
-                console.error("Error editing file:", error);
-            }
+        setFileName("");
+        setFileContent("");
+        const editButton = document.getElementById("editButton");
+        const fileEditContent = document.getElementById("fileContent") as HTMLTextAreaElement;
+        
+        if (!editButton || !fileEditContent) return;
+        try {
+            await axios.put(`${API_URL}/${name}`, { content: fileEditContent.value });
+            fetchFiles();
+        } catch (error) {
+            console.error("Error editing file:", error);
         }
     };
 
+
     const deleteFile = async (name: string) => {
+        setFileName("");
+        setFileContent("");
         if (window.confirm(`Are you sure you want to delete ${name}?`)) {
             try {
                 await axios.delete(`${API_URL}/${name}`);
@@ -64,7 +70,7 @@ const FileManager = () => {
     return (
         <div className="p-6 max-w-lg mx-auto bg-white rounded-lg shadow flex flex-col items-center">
             <h2 className="text-xl font-bold mb-4">📂 File Manager</h2>
-    
+
             <div className="mb-4 w-full flex flex-col">
                 <input
                     className="border p-2 w-full mb-2"
@@ -78,7 +84,7 @@ const FileManager = () => {
                 <textarea
                     id="fileContent"
                     className="border p-2 w-full"
-                    placeholder="File Content"
+                    placeholder="File content here..."
                     value={fileContent}
                     onChange={(e) => setFileContent(e.target.value)}
                 />
@@ -89,7 +95,7 @@ const FileManager = () => {
                     Create File
                 </button>
             </div>
-    
+
             <table className="mt-4 w-full flex flex-col">
                 {files.length ? (
                     files.map((file) => (
@@ -100,6 +106,7 @@ const FileManager = () => {
                             <span>{file}</span>
                             <div className="flex flex-col gap-2 mt-2">
                                 <button
+                                    id="editButton"
                                     className="bg-yellow-500 text-white px-2 py-1 rounded"
                                     onClick={() => editFile(file)}
                                 >
@@ -120,7 +127,7 @@ const FileManager = () => {
             </table>
         </div>
     );
-    
+
 };
 
 export default FileManager;
