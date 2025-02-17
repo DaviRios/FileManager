@@ -62,10 +62,10 @@ const FileManager = () => {
     }, []);
 
     return (
-        <div className="p-6 max-w-lg mx-auto bg-white rounded-lg shadow">
+        <div className="p-6 max-w-lg mx-auto bg-white rounded-lg shadow flex flex-col items-center">
             <h2 className="text-xl font-bold mb-4">📂 File Manager</h2>
-
-            <div className="mb-4">
+    
+            <div className="mb-4 w-full flex flex-col">
                 <input
                     className="border p-2 w-full mb-2"
                     type="text"
@@ -73,7 +73,10 @@ const FileManager = () => {
                     value={fileName}
                     onChange={(e) => setFileName(e.target.value)}
                 />
+            </div>
+            <div className="mb-4 w-full flex flex-col">
                 <textarea
+                    id="fileContent"
                     className="border p-2 w-full"
                     placeholder="File Content"
                     value={fileContent}
@@ -86,18 +89,18 @@ const FileManager = () => {
                     Create File
                 </button>
             </div>
-
-            <ul className="mt-4">
+    
+            <table className="mt-4 w-full flex flex-col">
                 {files.length ? (
                     files.map((file) => (
-                        <li
+                        <tr
                             key={file}
-                            className="flex justify-between items-center border-b p-2"
+                            className="flex flex-col items-start border-b p-2 bg-white shadow-sm"
                         >
                             <span>{file}</span>
-                            <div>
+                            <div className="flex flex-col gap-2 mt-2">
                                 <button
-                                    className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
+                                    className="bg-yellow-500 text-white px-2 py-1 rounded"
                                     onClick={() => editFile(file)}
                                 >
                                     ✏️ Edit
@@ -109,14 +112,15 @@ const FileManager = () => {
                                     🗑️ Delete
                                 </button>
                             </div>
-                        </li>
+                        </tr>
                     ))
                 ) : (
                     <p>No files found.</p>
                 )}
-            </ul>
+            </table>
         </div>
     );
+    
 };
 
 export default FileManager;
