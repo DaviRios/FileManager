@@ -10,13 +10,26 @@ const BASE_DIRECTORY = path.join(__dirname, 'files'); // Default directory save
 app.use(cors()); // Com. frontend
 app.use(express.json()); // Json body access
 
-// 📂 Listar arquivos
+// 📂 File List
 app.get('/files', async (req, res) => {
     try {
-        const files = await fs.readdir(BASE_DIRECTORY);
+        const files = await fs.readdir(BASE_DIRECTORY); 
         res.json({ files });
     } catch (err) {
         res.status(500).json({ error: err.message });
+    }
+});
+
+// 📂 File content search
+app.get('/files/:name', async (req, res) => {
+    const fileName = decodeURIComponent(req.params.name);
+    const filePath = path.join(BASE_DIRECTORY, fileName); 
+    
+    try {
+        const content = await fs.readFile(filePath, 'utf8'); 
+        res.json({ content });
+    } catch (err) {
+        res.status(404).json({ error: "File not found" });
     }
 });
 
@@ -41,8 +54,8 @@ app.put('/files/:name', async (req, res) => {
     const filePath = path.join(BASE_DIRECTORY, req.params.name);
 
     try {
-        await fs.access(filePath); // Verify file existence
-        await fs.writeFile(filePath, content || '');
+        await fs.access(filePath); // Verify if file exists
+        await fs.writeFile(filePath, content || ''); 
         res.json({ message: '✅ File edited successfully' });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -54,7 +67,7 @@ app.delete('/files/:name', async (req, res) => {
     const filePath = path.join(BASE_DIRECTORY, req.params.name);
 
     try {
-        await fs.unlink(filePath);
+        await fs.unlink(filePath); 
         res.json({ message: '✅ File deleted successfully' });
     } catch (err) {
         res.status(500).json({ error: err.message });

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createElement, useEffect, useState } from "react";
 import axios from "axios";
 
 const API_URL = "http://localhost:5000/files";
@@ -38,8 +38,8 @@ const FileManager = () => {
         setFileName("");
         setFileContent("");
         const editButton = document.getElementById("editButton");
-        const fileEditContent = document.getElementById("fileContent") as HTMLTextAreaElement;
-        
+        const fileEditContent = document.getElementById("fileContentArea") as HTMLTextAreaElement;
+
         if (!editButton || !fileEditContent) return;
         try {
             await axios.put(`${API_URL}/${name}`, { content: fileEditContent.value });
@@ -53,15 +53,24 @@ const FileManager = () => {
     const deleteFile = async (name: string) => {
         setFileName("");
         setFileContent("");
-        if (window.confirm(`Are you sure you want to delete ${name}?`)) {
-            try {
-                await axios.delete(`${API_URL}/${name}`);
-                fetchFiles();
-            } catch (error) {
-                console.error("Error deleting file:", error);
-            }
+        try {
+            await axios.delete(`${API_URL}/${name}`);
+            fetchFiles();
+        } catch (error) {
+            console.error("Error deleting file:", error);
         }
     };
+
+    const showFile = async (name: string) => {
+        try {
+            const response = await axios.get(`${API_URL}/${encodeURIComponent(name)}`);
+            setFileName(name);
+            setFileContent(response.data.content || "");
+        } catch (error) {
+            console.error("Error fetching file content:", error);
+        }
+    };
+
 
     useEffect(() => {
         fetchFiles();
@@ -82,7 +91,7 @@ const FileManager = () => {
             </div>
             <div className="mb-4 w-full flex flex-col">
                 <textarea
-                    id="fileContent"
+                    id="fileContentArea"
                     className="border p-2 w-full"
                     placeholder="File content here..."
                     value={fileContent}
@@ -97,33 +106,32 @@ const FileManager = () => {
             </div>
 
             <table className="mt-4 w-full flex flex-col">
-                {files.length ? (
-                    files.map((file) => (
-                        <tr
-                            key={file}
-                            className="flex flex-col items-start border-b p-2 bg-white shadow-sm"
-                        >
-                            <span>{file}</span>
-                            <div className="flex flex-col gap-2 mt-2">
-                                <button
-                                    id="editButton"
-                                    className="bg-yellow-500 text-white px-2 py-1 rounded"
-                                    onClick={() => editFile(file)}
-                                >
-                                    ✏️ Edit
-                                </button>
-                                <button
-                                    className="bg-red-500 text-white px-2 py-1 rounded"
-                                    onClick={() => deleteFile(file)}
-                                >
-                                    🗑️ Delete
-                                </button>
-                            </div>
+                <tbody>
+                    {files.length ? (
+                        files.map((file) => (
+                            <tr key={file} className="border-b p-2 bg-white shadow-sm">
+                                <td>
+                                    <button className="text-blue-500" onClick={() => showFile(file)}>
+                                        {file}
+                                    </button>
+                                </td>
+                                <td>
+                                    <button
+                                        className="bg-red-500 text-white px-2 py-1 rounded ml-2"
+                                        onClick={() => deleteFile(file)}
+                                    >
+                                        🗑️ Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan={2} className="text-center p-4">No files found.</td>
                         </tr>
-                    ))
-                ) : (
-                    <p>No files found.</p>
-                )}
+                    )}
+                </tbody>
+
             </table>
         </div>
     );
