@@ -111,14 +111,18 @@ const FileManager = () => {
                     value={fileContent}
                     onChange={(e) => setFileContent(e.target.value)}
                 />
-                <button
+                
+                
+            </div>
+
+            <div className="mb-4 w-full flex flex-col">
+            <button
                     id = "createButton"
                     className="bg-blue-500 text-white p-2 mt-2 w-full rounded"
                     onClick={createFile}
                 >
                     Create File
                 </button>
-                
             </div>
 
             <table className="mt-4 w-full flex flex-col">
@@ -135,7 +139,7 @@ const FileManager = () => {
                                 <td>
                                 <button
         className="bg-yellow-500 text-white p-2 mt-2 w-full rounded"
-        onClick={saveFile}  // Chama a função saveFile para salvar as alterações
+        onClick={saveFile}  
     >
         ✍️ Save Changes
     </button>

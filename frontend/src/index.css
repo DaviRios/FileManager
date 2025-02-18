@@ -32,16 +32,27 @@ body {
   min-height: 100vh;
 }
 
-input {
-  margin: 0;
-  min-width: 46.3vw;
-  min-height: 5vh;
-  margin-bottom: 0.5em;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw; 
+
+input, textarea {
+  width: 46.5vw;
+  min-height: 5vh;  
+  border-radius: 5px;
+  margin-bottom: 0.4em;
 }
 
-textarea{
-  margin: 0;
-  width: 46.3vw;
+#createButton{
+  padding: 0.6em 10em;
+  width: 46.8vw;
+  min-height: 5vh;  
+  margin-top: -0.3em;
+  border-radius: 5px;
+}
+textarea {
   min-height: 25vh;
 }
 
@@ -54,30 +65,28 @@ button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
+  width: 12em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
-  display: block;
-  width: 50%;
+  text-align: center;
 }
 
-#createButton {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-  display: block;
-  width: 36.3em;
-  margin-left: 24vw;
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 52.3vw; 
+  margin-top: 1em;
 }
+
+.small-button {
+  width: calc(46.3vw / 3);
+  margin: 0;
+}
+
 
 button:hover, #createButton:hover {
   border-color: #ffe449;
@@ -85,25 +94,6 @@ button:hover, #createButton:hover {
 button:focus, #createButton:focus,
 button:focus-visible, #createButton:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-
-table{
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 3em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  align-items: center;
-  transition: border-color 0.25s;
-  display: block;
-  width: 100%;  
-}
-
-table td{
-  width: 46.3vw;  
 }
 
 @media (prefers-color-scheme: light) {
