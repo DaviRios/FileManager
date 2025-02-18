@@ -37,6 +37,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 50vw; 
+}
 
 input, textarea {
   width: 46.5vw;
