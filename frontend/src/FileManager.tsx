@@ -35,22 +35,19 @@ const FileManager = () => {
     };
 
     const editFile = async (name: string) => {
-        setFileName(name); // Define o nome do arquivo
-        setFileContent(""); // Limpa o conteúdo atual (garante que a interface seja limpa)
+        setFileName(name); 
+        setFileContent(""); 
     
         try {
-            // Buscar o conteúdo do arquivo do servidor
             const response = await axios.get(`${API_URL}/${name}`);
             const content = response.data.content;
     
-            // Preenche a textarea com o conteúdo do arquivo
-            setFileContent(content); // Atualiza o estado com o conteúdo do arquivo
+            setFileContent(content); 
         } catch (error) {
             console.error("Error fetching file content:", error);
         }
     };
     
-    // Função para salvar as alterações
     const saveFile = async () => {
         if (!fileName) return alert("No file selected!");
     
@@ -59,10 +56,9 @@ const FileManager = () => {
         if (!fileEditContent) return;
     
         try {
-            // Envia a requisição para atualizar o conteúdo do arquivo
             await axios.put(`${API_URL}/${fileName}`, { content: fileEditContent.value });
-            setFileContent(fileEditContent.value); // Atualiza o conteúdo localmente após a edição
-            fetchFiles(); // Recarrega os arquivos na interface
+            setFileContent(fileEditContent.value); 
+            fetchFiles(); 
         } catch (error) {
             console.error("Error saving file:", error);
         }
@@ -116,6 +112,7 @@ const FileManager = () => {
                     onChange={(e) => setFileContent(e.target.value)}
                 />
                 <button
+                    id = "createButton"
                     className="bg-blue-500 text-white p-2 mt-2 w-full rounded"
                     onClick={createFile}
                 >
@@ -140,7 +137,7 @@ const FileManager = () => {
         className="bg-yellow-500 text-white p-2 mt-2 w-full rounded"
         onClick={saveFile}  // Chama a função saveFile para salvar as alterações
     >
-        Save Changes
+        ✍️ Save Changes
     </button>
                                 </td>
                                 <td>
