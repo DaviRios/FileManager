@@ -35,28 +35,30 @@
 ## 🛠 Installation & Usage
 
 ### 1️⃣ Clone the repository  
+
 ```bash
 git clone https://github.com/DaviRios/MyTasks.git
 cd MyTasks
+```
 
 ### 2️⃣ Install dependencies
-bash
+```bash
 Copiar
 Editar
 npm install
-
+```
 ### 3️⃣ Start the backend
-bash
+```bash
 Copiar
 Editar
 cd backend
 npm start
-
+```
 ###4️⃣ Start the frontend
-bash
+```bash
 Copiar
 Editar
 cd frontend
 npm run dev
-
+```
 ##The project will be available at http://localhost:5173.
