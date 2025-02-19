@@ -54,11 +54,11 @@ Editar
 cd backend
 npm start
 ```
-###4️⃣ Start the frontend
+### 4️⃣ Start the frontend
 ```bash
 Copiar
 Editar
 cd frontend
 npm run dev
 ```
-##The project will be available at http://localhost:5173.
+### The project will be available at http://localhost:5173.
