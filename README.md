@@ -2,11 +2,6 @@
 
 <h3 align="left">A simple and efficient file management system built with Node.js and a web-based frontend. This application allows users to create, edit, view, and delete files through a streamlined UI.</h3>
 
-- 🔭 I’m currently working on **enhancing the system with more features.**  
-- 🌱 I’m currently learning **advanced backend concepts and cloud infrastructure.**  
-- 👯 I’m looking to collaborate on **open-source projects and backend solutions.**  
-- 💬 Ask me about **Node.js, JavaScript, and software architecture.**  
-
 ---
 
 ## 🚀 Technologies Used
