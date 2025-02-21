@@ -1,5 +1,7 @@
 import { createElement, useEffect, useState } from "react";
 import axios from "axios";
+import {  toast } from "react-toastify";
+
 
 const API_URL = "http://localhost:5000/files";
 
@@ -19,37 +21,28 @@ const FileManager = () => {
             setFiles(response.data.files);
         } catch (error) {
             console.error("Error fetching files:", error);
+            toast.error("Error fetching file:");
+
         }
     };
 
     const createFile = async () => {
-        if (!fileName) return alert("File name is required!");
+        if (!fileName) return toast.warning("File name is required!");
         try {
             await axios.post(API_URL, { name: fileName, content: fileContent });
             setFileName("");
             setFileContent("");
             fetchFiles();
+            toast.success("File created!");
         } catch (error) {
             console.error("Error creating file:", error);
-        }
-    };
+            toast.error("Error creating file:");
 
-    const editFile = async (name: string) => {
-        setFileName(name); 
-        setFileContent(""); 
-    
-        try {
-            const response = await axios.get(`${API_URL}/${name}`);
-            const content = response.data.content;
-    
-            setFileContent(content); 
-        } catch (error) {
-            console.error("Error fetching file content:", error);
         }
     };
     
     const saveFile = async () => {
-        if (!fileName) return alert("No file selected!");
+        if (!fileName) return toast.warning("No file selected!");
     
         const fileEditContent = document.getElementById("fileContentArea") as HTMLTextAreaElement;
         
@@ -59,8 +52,12 @@ const FileManager = () => {
             await axios.put(`${API_URL}/${fileName}`, { content: fileEditContent.value });
             setFileContent(fileEditContent.value); 
             fetchFiles(); 
+            toast.success("Changes Saved!");
+
         } catch (error) {
             console.error("Error saving file:", error);
+            toast.error("Error saving file:");
+
         }
     };
     
@@ -71,8 +68,11 @@ const FileManager = () => {
         try {
             await axios.delete(`${API_URL}/${name}`);
             fetchFiles();
+            toast.success("File deleted!");
         } catch (error) {
             console.error("Error deleting file:", error);
+            toast.error("Error deleting file:");
+
         }
     };
 
@@ -83,6 +83,8 @@ const FileManager = () => {
             setFileContent(response.data.content || "");
         } catch (error) {
             console.error("Error fetching file content:", error);
+            toast.error("Error fetching file:");
+
         }
     };
 
