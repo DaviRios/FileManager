@@ -4,11 +4,9 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #2a394f;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -20,6 +18,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #ffe449;
 }
@@ -38,37 +37,23 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50vw; 
+  width: 50vw;
 }
 
 input, textarea {
-  width: 46.5vw;
-  min-height: 5vh;  
+  min-height: 5vh;
   border-radius: 5px;
   margin-bottom: 0.4em;
 }
 
-#createButton{
-  padding: 0.6em 10em;
-  width: 46.8vw;
-  min-height: 5vh;  
-  margin-top: -0.3em;
-  border-radius: 5px;
-}
 textarea {
   min-height: 25vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
 }
 
 button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
-  width: 12em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -78,24 +63,11 @@ button {
   text-align: center;
 }
 
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  width: 52.3vw; 
-  margin-top: 1em;
-}
-
-.small-button {
-  width: calc(46.3vw / 3);
-  margin: 0;
-}
-
-
-button:hover, #createButton:hover {
+button:hover {
   border-color: #ffe449;
 }
-button:focus, #createButton:focus,
-button:focus-visible, #createButton:focus-visible {
+
+button:focus, button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 

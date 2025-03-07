@@ -1,4 +1,4 @@
-import { createElement, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import {  toast } from "react-toastify";
 
@@ -93,10 +93,10 @@ const FileManager = () => {
     }, []);
 
     return (
-        <div className="p-6 max-w-lg mx-auto bg-white rounded-lg shadow flex flex-col items-center">
-            <h2 className="text-xl font-bold mb-4">📂 File Manager</h2>
+        <div>
+            <h2>📂 File Manager</h2>
 
-            <div className="mb-4 w-full flex flex-col">
+            <div>
                 <input
                     className="border p-2 w-full mb-2"
                     type="text"
@@ -105,7 +105,7 @@ const FileManager = () => {
                     onChange={(e) => setFileName(e.target.value)}
                 />
             </div>
-            <div className="mb-4 w-full flex flex-col">
+            <div >
                 <textarea
                     id="fileContentArea"
                     className="border p-2 w-full"
@@ -117,30 +117,30 @@ const FileManager = () => {
                 
             </div>
 
-            <div className="mb-4 w-full flex flex-col">
+            <div>
             <button
                     id = "createButton"
-                    className="bg-blue-500 text-white p-2 mt-2 w-full rounded"
+                    className="text-white w-full rounded"
                     onClick={createFile}
                 >
                     Create File
                 </button>
             </div>
 
-            <table className="mt-4 w-full flex flex-col">
+            <table className="w-full ">
                 <tbody>
                     {files.length ? (
                         files.map((file) => (
-                            <tr key={file} className="border-b p-2 bg-white shadow-sm">
+                            <tr key={file}>
                                 <td>
-                                    <button className="text-blue-500" onClick={() => showFile(file)}>
+                                    <button className="text-blue-500 p-2 mt-2 w-full rounded" onClick={() => showFile(file)}>
                                         {file}
                                     </button>
                                 </td>
 
                                 <td>
                                 <button
-        className="bg-yellow-500 text-white p-2 mt-2 w-full rounded"
+        className="text-white p-2 ml-1 m mt-2 w-full rounded"
         onClick={saveFile}  
     >
         ✍️ Save Changes
@@ -148,7 +148,7 @@ const FileManager = () => {
                                 </td>
                                 <td>
                                     <button
-                                        className="bg-red-500 text-white px-2 py-1 rounded ml-2"
+                                        className="text-white ml-2 mt-2 w-95% rounded"
                                         onClick={() => deleteFile(file)}
                                     >
                                         🗑️ Delete

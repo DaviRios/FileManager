@@ -6,9 +6,8 @@ import { ToastContainer} from "react-toastify";
 function App() {
 
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center bg-gray-100'>
+    <div className='min-h-screen flex flex-col items-center justify-center'>
       <ToastContainer />
-
       <FileManager />
     </div>
   )
